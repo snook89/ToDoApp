@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,7 +12,11 @@ namespace ToDoApp.Models
 	{
 		private bool _isDone;
 		private string _text;
+
+		[JsonProperty(PropertyName = "creationDate")]
 		public DateTime CreationDate { get; set; } = DateTime.Now;
+
+		[JsonProperty(PropertyName = "isDone")]
 		public bool IsDone
 		{
 			get { return _isDone; }
@@ -23,6 +28,8 @@ namespace ToDoApp.Models
 				OnPropertyChanged("IsDone");
 			}
 		}
+
+		[JsonProperty(PropertyName = "text")]
 		public string Text
 		{
 			get { return _text; }
