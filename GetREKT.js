@@ -6,7 +6,7 @@
     return window.location.protocol == 'https:' ? 'https://' : 'http://';
   }
   var TRASH_R = ['$$$####!!!!!!!', '^^^^^^##@', '@!^^!@#@@$$$$$', '^^#@@!!@#!$', '@#!@@@##$$@@'];
-  var version_getrekt = '3.4', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = ' 💎 Unlimited', user_id = 40808935, uid = 'c6baa905255590eaaf36a6710_40808935', IP = '0.0.0.0', logged = true, VAST_url = false;
+  var version_getrekt = '3.4', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = ' 💎 Unlimited', user_id = 40808945, uid = 'c6baa905255590eaaf36a6710_40808945', IP = '0.0.0.0', logged = true, VAST_url = false;
 
   console.log('GetREKT', 'plugin', '[POST] LOADED - ' + Protocol() + 'lampa.stream');
   console.log('GetREKT', 'device', '[UID] ' + uid);
@@ -383,7 +383,7 @@
         type: 'get',
         dataType: 'text'
       }).done(function (data) {
-        IP = data;
+        IP = (data || '').toString().trim();
         console.log('GetREKT', 'open', name, IP);
       });
     },
@@ -2123,7 +2123,8 @@
       query.push('logged=' + logged);
       query.push('vers=' + version_getrekt);
       query.push('prefer_dash=' + (Lampa.Storage.field('online_dash') === true));
-      query.push('ip=' + IP);
+      var ip = (IP || '').toString().trim();
+      if (ip && ip !== '0.0.0.0') query.push('ip=' + encodeURIComponent(ip));
       //query.push('server=' + Lampa.Storage.field('pub_server', 1));
       //query.push('hevc=' + Lampa.Storage.field('online_hevc', true));
       //query.push('type=' + this.getChoice(balanser).type);
