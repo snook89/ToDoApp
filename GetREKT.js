@@ -6,7 +6,7 @@
     return window.location.protocol == 'https:' ? 'https://' : 'http://';
   }
   var TRASH_R = ['$$$####!!!!!!!', '^^^^^^##@', '@!^^!@#@@$$$$$', '^^#@@!!@#!$', '@#!@@@##$$@@'];
-  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = ' 💎 Unlimited', user_id = 408088909, uid = 'c6baa905255590eaaf36a6710_408088909', IP = '0.0.0.0', logged = true, VAST_url = false;
+  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = ' 💎 Unlimited', user_id = 408088910, uid = 'c6baa905255590eaaf36a6710_408088910', IP = '0.0.0.0', logged = true, VAST_url = false;
 
   console.log('GetREKT', 'plugin', '[POST] LOADED - ' + Protocol() + 'lampa.stream');
   console.log('GetREKT', 'device', '[UID] ' + uid);
@@ -13701,3 +13701,4 @@ onChange: function (value) {
 
 })();
 //# sourceURL=https://lampa.stream/plugin_getrekt.js
+
