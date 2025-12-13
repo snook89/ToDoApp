@@ -5874,7 +5874,7 @@
             var stream = element.stream_url ? element.stream_url : element.playlist_url;
             if (element.title.match('Описание|Трейлер') == null) {
               if (element.template && element.template.indexOf('film.') > -1 || element.logo_30x30 && element.logo_30x30.match('mediafil') || element.logo_30x30 && element.logo_30x30.match('folder') && element.playlist_url && element.playlist_url.indexOf('torrstream?magnet') > -1) {
-                body.attr('class', '');
+                body.attr('class', 'category-full');
                 scroll.body().addClass('torrent-list');
                 element.quality = (voic && voic[0]) || '';
                 element.info = '';
