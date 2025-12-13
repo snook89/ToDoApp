@@ -6,7 +6,7 @@
     return window.location.protocol == 'https:' ? 'https://' : 'http://';
   }
   var TRASH_R = ['$$$####!!!!!!!', '^^^^^^##@', '@!^^!@#@@$$$$$', '^^#@@!!@#!$', '@#!@@@##$$@@'];
-  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = ' 💎 Unlimited', user_id = 408088940, uid = 'c6baa905255590eaaf36a6710_408088940', IP = '0.0.0.0', logged = true, VAST_url = false;
+  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = ' 💎 Unlimited', user_id = 408088950, uid = 'c6baa905255590eaaf36a6710_408088950', IP = '0.0.0.0', logged = true, VAST_url = false;
 
   console.log('GetREKT', 'plugin', '[POST] LOADED - ' + Protocol() + 'lampa.stream');
   console.log('GetREKT', 'device', '[UID] ' + uid);
@@ -4720,8 +4720,8 @@
       scroll.body().append(Lampa.Template.get('getrekt_content_loading'));
     };
     this.loading = function (status) {
-      if (status) this.activity.loader(true); else {
-        this.activity.loader(false);
+      if (status) ; else {
+        ;
         this.activity.toggle();
       }
     };
@@ -5204,7 +5204,7 @@
         });
       }
 
-      _this4.activity.loader(false);
+      ;
 
       setTimeout(function () {
         Lampa.Controller.enable('content');
@@ -5636,7 +5636,7 @@
     };
     this.back = function () {
       if (back_url) {
-        this.activity.loader(true);
+        ;
         this.reset();
         this.request(back_url);
         back_url = false;
@@ -5689,7 +5689,7 @@
     var active = 0;
     this.create = function () {
       var _this = this;
-      this.activity.loader(true);
+      ;
       if (object.submenu) _this.build(object.url);
       else {
         var u = object.url && object.url.indexOf('?') > -1 ? '&' : '?';
@@ -5712,7 +5712,7 @@
           _this2.append(result);
           if (result.channels.length) waitload = false;
           Lampa.Controller.enable('content');
-          _this2.activity.loader(false);
+          ;
         }, function (a, c) {
           Lampa.Noty.show(network.errorDecode(a, c));
         });
@@ -5721,10 +5721,10 @@
     this.stream = function (data, title, youtube, subs, element, view) {
       var _this = this;
       if (data.indexOf('getstream') == -1 && (data.indexOf('rgfoot') > -1 || data.indexOf('torrstream') > -1 || data.indexOf('torrent') > -1)) {
-        this.activity.loader(true);
+        ;
         network.timeout(10000);
         network["native"](data + '&' + ForkTV.user_dev(), function (json) {
-          _this.activity.loader(false);
+          ;
           if (json.channels.length > 0) {
             var playlist = [];
             var data = json.channels[0];
@@ -5748,7 +5748,7 @@
             } else Lampa.Noty.show(data.title);
           } else Lampa.Noty.show(Lampa.Lang.translate('online_nolink'));
         }, function (a, e) {
-          _this.activity.loader(false);
+          ;
           Lampa.Noty.show(network.errorDecode(a, e));
         }, false, {
           dataType: 'json'
@@ -6617,7 +6617,7 @@
         scroll_list.append(li);
       });
       html.append(html_list);
-      _this.activity.loader(false);
+      ;
       _this.activity.toggle();
     };
     this.saveCats = function () {
@@ -6852,7 +6852,7 @@
 
         _this.builder(data);
         _this.buildFilter();
-        _this.activity.loader(false);
+        ;
         _this.activity.toggle();
       } else {
         return _this.empty();
