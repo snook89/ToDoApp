@@ -6,7 +6,7 @@
     return window.location.protocol == 'https:' ? 'https://' : 'http://';
   }
   var TRASH_R = ['$$$####!!!!!!!', '^^^^^^##@', '@!^^!@#@@$$$$$', '^^#@@!!@#!$', '@#!@@@##$$@@'];
-  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎 FREE 💎', user_id = 41408989, uid = 'c6baa905255590eaaf36a6710_41408989', IP = '185.153.179.57', logged = true, VAST_url = false;
+  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎FREE', user_id = 41408989, uid = 'c6baa905255590eaaf36a6710_41408989', IP = '185.153.179.57', logged = true, VAST_url = false;
 
   console.log('GetREKT', 'plugin', '[POST] LOADED - ' + Protocol() + 'lampa.stream');
   console.log('GetREKT', 'device', '[UID] ' + uid);
@@ -11550,10 +11550,13 @@
           + '.online_getrekt__viewed>svg,.online_getrekt__subtitle>svg{width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important;min-width:0!important;min-height:0!important;flex-shrink:0!important;display:block!important;}'
           + '.online_getrekt__episode-number{font-size:24px!important;line-height:1!important;}'
           + '.online_getrekt__episode-number-season,.online_getrekt__type-video{font-size:12px!important;line-height:1!important;padding:3px 4px!important;}'
-          + '.view--getrekt_online .online_getrekt__descr{opacity:.65!important;font-size:1.05em!important;margin-top:.35em!important;display:-webkit-box!important;-webkit-line-clamp:2!important;line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}'
-          + '.view--getrekt_online .online_getrekt__descr:empty{display:none!important;}'
-          + '.view--getrekt_online .online_getrekt__subtitle,.view--getrekt_online .online_getrekt__viewed,.view--getrekt_online .online_getrekt-rate>svg,.view--getrekt_online .online_getrekt__loader{display:none!important;}'
-          + '.view--getrekt_online .online_getrekt__img svg{display:none!important;}'
+          + '.online_getrekt__descr{opacity:.65!important;font-size:1.05em!important;margin-top:.35em!important;display:-webkit-box!important;-webkit-line-clamp:2!important;line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}'
+          + '.online_getrekt__descr:empty{display:none!important;}'
+          + '.online_getrekt__subtitle,.online_getrekt__viewed,.online_getrekt-rate>svg,.online_getrekt__loader{display:none!important;}'
+          + '.online_getrekt svg{display:none!important;}'
+          + '.online_getrekt__folder svg{display:block!important;}'
+          + '.online_getrekt__img svg{display:none!important;}'
+          + '.online_getrekt__img:before,.online_getrekt__img:after{content:none!important;display:none!important;}'
           + '</style>');
       }
       $('body').append(Lampa.Template.get('radio_style_getrekt', {}, true));
@@ -11580,19 +11583,8 @@
 
               var rect = svg.getBoundingClientRect();
               if (rect && (rect.width > 96 || rect.height > 96)) {
-                // If something injects an SVG overlay into the episode poster, hide it entirely
-                if (svg.closest && svg.closest('.online_getrekt__img')) {
-                  svg.style.display = 'none';
-                  continue;
-                }
-                svg.style.width = '24px';
-                svg.style.height = '24px';
-                svg.style.maxWidth = '32px';
-                svg.style.maxHeight = '32px';
-                svg.style.minWidth = '0';
-                svg.style.minHeight = '0';
-                svg.style.display = 'block';
-                svg.style.flexShrink = '0';
+                // Any oversized SVG in GetREKT UI becomes a giant overlay: hide it.
+                svg.style.display = 'none';
               }
             }
 
