@@ -6,7 +6,7 @@
     return window.location.protocol == 'https:' ? 'https://' : 'http://';
   }
   var TRASH_R = ['$$$####!!!!!!!', '^^^^^^##@', '@!^^!@#@@$$$$$', '^^#@@!!@#!$', '@#!@@@##$$@@'];
-  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎💎💎💎💎', user_id = 41838989, uid = 'c6baa905255590eaaf36a6710_41838989', IP = '185.153.179.57', logged = true, VAST_url = false;
+  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎💎💎', user_id = 41838989, uid = 'c6baa905255590eaaf36a6710_41838989', IP = '185.153.179.57', logged = true, VAST_url = false;
 
   console.log('GetREKT', 'plugin', '[POST] LOADED - ' + Protocol() + 'lampa.stream');
   console.log('GetREKT', 'device', '[UID] ' + uid);
@@ -11536,7 +11536,10 @@
         $('body').append('<style id="getrekt-online-css-fix">'
           + '.online_getrekt,.online-getrekt-watched,.onlines_v1{font-size:1rem!important;}'
           + '.online_getrekt__loader{width:32px!important;height:32px!important;margin-left:-16px!important;margin-top:-16px!important;}'
-          + '.online_getrekt__viewed,.online_getrekt__subtitle{font-size:12px!important;padding:4px!important;}'
+          + '.online_getrekt__viewed,.online_getrekt__subtitle{width:32px!important;height:32px!important;padding:0!important;font-size:12px!important;line-height:1!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;box-sizing:border-box!important;}'
+          + '.online_getrekt__viewed>svg,.online_getrekt__subtitle>svg{width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important;min-width:0!important;min-height:0!important;flex-shrink:0!important;display:block!important;}'
+          + '.online_getrekt__episode-number{font-size:24px!important;line-height:1!important;}'
+          + '.online_getrekt__episode-number-season,.online_getrekt__type-video{font-size:12px!important;line-height:1!important;padding:3px 4px!important;}'
           + '</style>');
       }
       $('body').append(Lampa.Template.get('radio_style_getrekt', {}, true));
@@ -11584,6 +11587,38 @@
                 loader.style.height = '32px';
                 loader.style.marginLeft = '-16px';
                 loader.style.marginTop = '-16px';
+              }
+            }
+
+            // Clamp episode-card overlays that can blow up via inherited font-size/em padding
+            var badges = scope.querySelectorAll('.online_getrekt__viewed, .online_getrekt__subtitle');
+            for (var k = 0; k < badges.length; k++) {
+              var badge = badges[k];
+              if (!badge || !badge.getBoundingClientRect) continue;
+              var brect = badge.getBoundingClientRect();
+              if (brect && (brect.width > 96 || brect.height > 96)) {
+                badge.style.width = '32px';
+                badge.style.height = '32px';
+                badge.style.padding = '0';
+                badge.style.fontSize = '12px';
+                badge.style.lineHeight = '1';
+                badge.style.display = 'flex';
+                badge.style.alignItems = 'center';
+                badge.style.justifyContent = 'center';
+                badge.style.overflow = 'hidden';
+                badge.style.boxSizing = 'border-box';
+              }
+            }
+
+            var epiNums = scope.querySelectorAll('.online_getrekt__episode-number, .online_getrekt__episode-number-season, .online_getrekt__type-video');
+            for (var p = 0; p < epiNums.length; p++) {
+              var epi = epiNums[p];
+              if (!epi || !epi.getBoundingClientRect) continue;
+              var erect = epi.getBoundingClientRect();
+              if (erect && (erect.width > 320 || erect.height > 200)) {
+                // These are text overlays; keep them readable but never gigantic
+                epi.style.fontSize = epi.classList && epi.classList.contains('online_getrekt__episode-number') ? '24px' : '12px';
+                epi.style.lineHeight = '1';
               }
             }
           } catch (e) {}
