@@ -6,7 +6,7 @@
     return window.location.protocol == 'https:' ? 'https://' : 'http://';
   }
   var TRASH_R = ['$$$####!!!!!!!', '^^^^^^##@', '@!^^!@#@@$$$$$', '^^#@@!!@#!$', '@#!@@@##$$@@'];
-  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = ' 💎 Unlimited 💎', user_id = 41818989, uid = 'c6baa905255590eaaf36a6710_41818989', IP = '185.153.179.57', logged = true, VAST_url = false;
+  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎 Unlimited 💎', user_id = 41828989, uid = 'c6baa905255590eaaf36a6710_41828989', IP = '185.153.179.57', logged = true, VAST_url = false;
 
   console.log('GetREKT', 'plugin', '[POST] LOADED - ' + Protocol() + 'lampa.stream');
   console.log('GetREKT', 'device', '[UID] ' + uid);
@@ -11532,6 +11532,12 @@
       $('body').append(Lampa.Template.get('hdgo_style', {}, true));
       $('body').append(Lampa.Template.get('getrekt_radio_style', {}, true));
       $('body').append(Lampa.Template.get('getrekt_online_css', {}, true));
+      if (!document.getElementById('getrekt-online-css-fix')) {
+        $('body').append('<style id="getrekt-online-css-fix">'
+          + '.view--getrekt_online .online_getrekt{font-size:1em!important;}'
+          + '.view--getrekt_online .online_getrekt__loader{width:32px!important;height:32px!important;margin-left:-16px!important;margin-top:-16px!important;}'
+          + '</style>');
+      }
       $('body').append(Lampa.Template.get('radio_style_getrekt', {}, true));
 
       if (!window.__getrekt_svg_clamp) {
@@ -11564,6 +11570,19 @@
                 svg.style.minHeight = '0';
                 svg.style.display = 'block';
                 svg.style.flexShrink = '0';
+              }
+            }
+
+            var loaders = scope.querySelectorAll('.online_getrekt__loader');
+            for (var j = 0; j < loaders.length; j++) {
+              var loader = loaders[j];
+              if (!loader || !loader.getBoundingClientRect) continue;
+              var lrect = loader.getBoundingClientRect();
+              if (lrect && (lrect.width > 96 || lrect.height > 96)) {
+                loader.style.width = '32px';
+                loader.style.height = '32px';
+                loader.style.marginLeft = '-16px';
+                loader.style.marginTop = '-16px';
               }
             }
           } catch (e) {}
