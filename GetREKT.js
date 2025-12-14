@@ -6,7 +6,7 @@
     return window.location.protocol == 'https:' ? 'https://' : 'http://';
   }
   var TRASH_R = ['$$$####!!!!!!!', '^^^^^^##@', '@!^^!@#@@$$$$$', '^^#@@!!@#!$', '@#!@@@##$$@@'];
-  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎💎💎', user_id = 41838989, uid = 'c6baa905255590eaaf36a6710_41838989', IP = '185.153.179.57', logged = true, VAST_url = false;
+  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎FREE💎', user_id = 41838989, uid = 'c6baa905255590eaaf36a6710_41838989', IP = '185.153.179.57', logged = true, VAST_url = false;
 
   console.log('GetREKT', 'plugin', '[POST] LOADED - ' + Protocol() + 'lampa.stream');
   console.log('GetREKT', 'device', '[UID] ' + uid);
@@ -3264,11 +3264,11 @@
         }
       }
 
-      if (serial && episode_num && filter_find.type && filter_find.type.length) image.append('<div class="online_getrekt__type-video">' + element.type + '</div>');
-      if (serial && episode_num && filter_find.season.length) image.append('<div class="online_getrekt__episode-number-season">S' + (element.season || episode && (episode.snumber || episode.season_number) || 0) + ':E' + (element.episode || episode && (episode.number || episode.episode_number) || 0) + '</div>');
+      if (serial && episode_num && filter_find.type && filter_find.type.length) image.append('<div class="online_getrekt__type-video" style="font-size:12px!important;line-height:1!important;padding:3px 4px!important;max-width:80%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;">' + element.type + '</div>');
+      if (serial && episode_num && filter_find.season.length) image.append('<div class="online_getrekt__episode-number-season" style="font-size:12px!important;line-height:1!important;padding:3px 4px!important;">S' + (element.season || episode && (episode.snumber || episode.season_number) || 0) + ':E' + (element.episode || episode && (episode.number || episode.episode_number) || 0) + '</div>');
 
       if (serial && !episode && filter_find.season.length) {
-        image.append('<div class="online_getrekt__episode-number">' + ('0' + episode_num).slice(-2) + '</div>');
+        image.append('<div class="online_getrekt__episode-number" style="font-size:24px!important;line-height:1!important;">' + ('0' + episode_num).slice(-2) + '</div>');
         loader.remove();
       } else {
         var img = html.find('img')[0];
@@ -3288,10 +3288,10 @@
       html.find('.online_getrekt__timeline').append(Lampa.Timeline.render(element.timeline));
 
       if (Lampa.Timeline.details) html.find('.online_getrekt__timeline').append(Lampa.Timeline.details(element.timeline));
-      if (element.subtitles) html.find('.online_getrekt__img').append('<div class="online_getrekt__subtitle">' + Lampa.Template.get('icon_subs', {}, true) + '</div>');
+      if (element.subtitles) html.find('.online_getrekt__img').append('<div class="online_getrekt__subtitle" style="width:32px!important;height:32px!important;padding:0!important;font-size:12px!important;line-height:1!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;box-sizing:border-box!important;">' + Lampa.Template.get('icon_subs', {}, true) + '</div>');
       if (viewed.indexOf(hash_behold) !== -1) {
         scroll_to_mark = html;
-        html.find('.online_getrekt__img').append('<div class="online_getrekt__viewed">' + Lampa.Template.get('icon_viewed', {}, true) + '</div>');
+        html.find('.online_getrekt__img').append('<div class="online_getrekt__viewed" style="width:32px!important;height:32px!important;padding:0!important;font-size:12px!important;line-height:1!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;box-sizing:border-box!important;">' + Lampa.Template.get('icon_viewed', {}, true) + '</div>');
       }
 
       element.mark = function () {
@@ -3302,7 +3302,7 @@
           Lampa.Storage.set('online_view', viewed);
 
           if (html.find('.online_getrekt__viewed').length == 0) {
-            html.find('.online_getrekt__img').append('<div class="online_getrekt__viewed">' + Lampa.Template.get('icon_viewed', {}, true) + '</div>');
+            html.find('.online_getrekt__img').append('<div class="online_getrekt__viewed" style="width:32px!important;height:32px!important;padding:0!important;font-size:12px!important;line-height:1!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;box-sizing:border-box!important;">' + Lampa.Template.get('icon_viewed', {}, true) + '</div>');
           }
         }
 
@@ -5245,14 +5245,14 @@
         img.onload = function () {
           image.addClass('online_getrekt__img--loaded');
           loader.remove();
-          image.append('<div class="online_getrekt__episode-number">' + ('0' + episode.episode_number).slice(-2) + '</div>');
+          image.append('<div class="online_getrekt__episode-number" style="font-size:24px!important;line-height:1!important;">' + ('0' + episode.episode_number).slice(-2) + '</div>');
         };
 
         img.src = Lampa.TMDB.image('t/p/w300' + episode.still_path);
         images.push(img);
       } else {
         loader.remove();
-        image.append('<div class="online_getrekt__episode-number">' + ('0' + episode.episode_number).slice(-2) + '</div>');
+        image.append('<div class="online_getrekt__episode-number" style="font-size:24px!important;line-height:1!important;">' + ('0' + episode.episode_number).slice(-2) + '</div>');
       }
 
       html.on('hover:focus', function (e) {
