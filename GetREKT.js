@@ -6,7 +6,7 @@
     return window.location.protocol == 'https:' ? 'https://' : 'http://';
   }
   var TRASH_R = ['$$$####!!!!!!!', '^^^^^^##@', '@!^^!@#@@$$$$$', '^^#@@!!@#!$', '@#!@@@##$$@@'];
-  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎FREE💎', user_id = 41838989, uid = 'c6baa905255590eaaf36a6710_41838989', IP = '185.153.179.57', logged = true, VAST_url = false;
+  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎FREE💎', user_id = 41418989, uid = 'c6baa905255590eaaf36a6710_41418989', IP = '185.153.179.57', logged = true, VAST_url = false;
 
   console.log('GetREKT', 'plugin', '[POST] LOADED - ' + Protocol() + 'lampa.stream');
   console.log('GetREKT', 'device', '[UID] ' + uid);
@@ -3227,9 +3227,10 @@
       element.timeline = Lampa.Timeline.view(hash_timeline);
       if (episode) {
         element.title = (element.episode_name || episode.name || episode.title || element.title);
-        if (!element.info && episode.vote_average) info.push(Lampa.Template.get('getrekt_online_rate', {
-          rate: parseFloat(episode.vote_average + '').toFixed(1)
-        }, true));
+        // Rating icon removed (some skins/styles blow it up to huge size)
+        // if (!element.info && episode.vote_average) info.push(Lampa.Template.get('getrekt_online_rate', {
+        //   rate: parseFloat(episode.vote_average + '').toFixed(1)
+        // }, true));
 
         if (serial) {
           if (episode.air_date && fully && !(element.info.title || element.info).includes(Lampa.Utils.parseTime(episode.air_date).full)) info.push(Lampa.Utils.parseTime(episode.air_date).full);
@@ -3288,10 +3289,12 @@
       html.find('.online_getrekt__timeline').append(Lampa.Timeline.render(element.timeline));
 
       if (Lampa.Timeline.details) html.find('.online_getrekt__timeline').append(Lampa.Timeline.details(element.timeline));
-      if (element.subtitles) html.find('.online_getrekt__img').append('<div class="online_getrekt__subtitle" style="width:32px!important;height:32px!important;padding:0!important;font-size:12px!important;line-height:1!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;box-sizing:border-box!important;">' + Lampa.Template.get('icon_subs', {}, true) + '</div>');
+      // Subtitles badge removed (was causing huge white overlays in some setups)
+      // if (element.subtitles) html.find('.online_getrekt__img').append('<div class="online_getrekt__subtitle">' + Lampa.Template.get('icon_subs', {}, true) + '</div>');
       if (viewed.indexOf(hash_behold) !== -1) {
         scroll_to_mark = html;
-        html.find('.online_getrekt__img').append('<div class="online_getrekt__viewed" style="width:32px!important;height:32px!important;padding:0!important;font-size:12px!important;line-height:1!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;box-sizing:border-box!important;">' + Lampa.Template.get('icon_viewed', {}, true) + '</div>');
+        // Viewed badge removed (was causing huge white overlays in some setups)
+        // html.find('.online_getrekt__img').append('<div class="online_getrekt__viewed">' + Lampa.Template.get('icon_viewed', {}, true) + '</div>');
       }
 
       element.mark = function () {
@@ -3302,7 +3305,8 @@
           Lampa.Storage.set('online_view', viewed);
 
           if (html.find('.online_getrekt__viewed').length == 0) {
-            html.find('.online_getrekt__img').append('<div class="online_getrekt__viewed" style="width:32px!important;height:32px!important;padding:0!important;font-size:12px!important;line-height:1!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;box-sizing:border-box!important;">' + Lampa.Template.get('icon_viewed', {}, true) + '</div>');
+            // Viewed badge removed (was causing huge white overlays in some setups)
+            // html.find('.online_getrekt__img').append('<div class="online_getrekt__viewed">' + Lampa.Template.get('icon_viewed', {}, true) + '</div>');
           }
         }
 
@@ -11540,6 +11544,7 @@
           + '.online_getrekt__viewed>svg,.online_getrekt__subtitle>svg{width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important;min-width:0!important;min-height:0!important;flex-shrink:0!important;display:block!important;}'
           + '.online_getrekt__episode-number{font-size:24px!important;line-height:1!important;}'
           + '.online_getrekt__episode-number-season,.online_getrekt__type-video{font-size:12px!important;line-height:1!important;padding:3px 4px!important;}'
+          + '.view--getrekt_online .online_getrekt__subtitle,.view--getrekt_online .online_getrekt__viewed,.view--getrekt_online .online_getrekt-rate>svg,.view--getrekt_online .online_getrekt__loader{display:none!important;}'
           + '</style>');
       }
       $('body').append(Lampa.Template.get('radio_style_getrekt', {}, true));
