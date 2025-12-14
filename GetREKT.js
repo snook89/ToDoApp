@@ -6,7 +6,7 @@
     return window.location.protocol == 'https:' ? 'https://' : 'http://';
   }
   var TRASH_R = ['$$$####!!!!!!!', '^^^^^^##@', '@!^^!@#@@$$$$$', '^^#@@!!@#!$', '@#!@@@##$$@@'];
-  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎FREE', user_id = 41408989, uid = 'c6baa905255590eaaf36a6710_41408989', IP = '185.153.179.57', logged = true, VAST_url = false;
+  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎FREE', user_id = 40408989, uid = 'c6baa905255590eaaf36a6710_40408989', IP = '185.153.179.57', logged = true, VAST_url = false;
 
   console.log('GetREKT', 'plugin', '[POST] LOADED - ' + Protocol() + 'lampa.stream');
   console.log('GetREKT', 'device', '[UID] ' + uid);
@@ -3276,9 +3276,9 @@
       } else {
         var img = html.find('img')[0];
 
-        img.onerror = function () {
-          img.src = './img/img_broken.svg';
-        };
+        // Try multiple fallbacks before showing any placeholder (prevents giant svg "play-circle")
+        var __blankPixel = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+        var __fallbacks = [];
 
         img.onload = function () {
           image.addClass('online_getrekt__img--loaded');
@@ -3288,7 +3288,35 @@
         var pubThumb = (object.movie.source == 'pub' && episode && episode.thumbnail) ? episode.thumbnail : '';
         var tmdbStill = (episode && episode.still_path) ? Lampa.TMDB.image('t/p/w300' + episode.still_path) : '';
         var tmdbBackdrop = (object.movie && object.movie.backdrop_path) ? Lampa.TMDB.image('t/p/w300' + object.movie.backdrop_path) : '';
-        img.src = object.movie.source == 'filmix' ? object.movie.img : object.movie.source == 'pub' ? (pubThumb || object.movie.background_image || tmdbBackdrop) : (element.img || tmdbStill || tmdbBackdrop);
+
+        var primary = object.movie.source == 'filmix' ? object.movie.img : object.movie.source == 'pub' ? (pubThumb || object.movie.background_image || tmdbBackdrop) : (element.img || tmdbStill || tmdbBackdrop);
+        // Build fallback list (unique, non-empty)
+        var candidates = [element.img, pubThumb, tmdbStill, object.movie && object.movie.background_image, tmdbBackdrop, object.movie && object.movie.img, __blankPixel];
+        for (var cf = 0; cf < candidates.length; cf++) {
+          var c = candidates[cf];
+          if (!c) continue;
+          if (primary && c === primary) continue;
+          if (__fallbacks.indexOf(c) !== -1) continue;
+          __fallbacks.push(c);
+        }
+
+        img.onerror = function () {
+          try {
+            var idx = parseInt(img.getAttribute('data-fallback-index') || '0', 10);
+            if (idx >= __fallbacks.length) {
+              img.onerror = function () { };
+              img.src = __blankPixel;
+              return;
+            }
+            img.setAttribute('data-fallback-index', String(idx + 1));
+            img.src = __fallbacks[idx];
+          } catch (e) {
+            img.onerror = function () { };
+            img.src = __blankPixel;
+          }
+        };
+
+        img.src = primary || __blankPixel;
         images.push(img);
       }
 
@@ -5248,9 +5276,9 @@
       var img = html.find('img')[0];
 
       if (episode.still_path) {
-        img.onerror = function () {
-          img.src = './img/img_broken.svg';
-        };
+        // Try multiple fallbacks before showing any placeholder (prevents giant svg "play-circle")
+        var __blankPixel2 = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+        var __fallbacks2 = [];
 
         img.onload = function () {
           image.addClass('online_getrekt__img--loaded');
@@ -5258,7 +5286,33 @@
           image.append('<div class="online_getrekt__episode-number" style="font-size:24px!important;line-height:1!important;">' + ('0' + episode.episode_number).slice(-2) + '</div>');
         };
 
-        img.src = Lampa.TMDB.image('t/p/w300' + episode.still_path);
+        var primary2 = Lampa.TMDB.image('t/p/w300' + episode.still_path);
+        var candidates2 = [primary2, object.movie && object.movie.background_image, object.movie && object.movie.img, __blankPixel2];
+        for (var cf2 = 0; cf2 < candidates2.length; cf2++) {
+          var c2 = candidates2[cf2];
+          if (!c2) continue;
+          if (primary2 && c2 === primary2) continue;
+          if (__fallbacks2.indexOf(c2) !== -1) continue;
+          __fallbacks2.push(c2);
+        }
+
+        img.onerror = function () {
+          try {
+            var idx2 = parseInt(img.getAttribute('data-fallback-index') || '0', 10);
+            if (idx2 >= __fallbacks2.length) {
+              img.onerror = function () { };
+              img.src = __blankPixel2;
+              return;
+            }
+            img.setAttribute('data-fallback-index', String(idx2 + 1));
+            img.src = __fallbacks2[idx2];
+          } catch (e) {
+            img.onerror = function () { };
+            img.src = __blankPixel2;
+          }
+        };
+
+        img.src = primary2 || __blankPixel2;
         images.push(img);
       } else {
         loader.remove();
