@@ -6,7 +6,7 @@
     return window.location.protocol == 'https:' ? 'https://' : 'http://';
   }
   var TRASH_R = ['$$$####!!!!!!!', '^^^^^^##@', '@!^^!@#@@$$$$$', '^^#@@!!@#!$', '@#!@@@##$$@@'];
-  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎 Unlimited 💎', user_id = 41828989, uid = 'c6baa905255590eaaf36a6710_41828989', IP = '185.153.179.57', logged = true, VAST_url = false;
+  var version_getrekt = '3.3', API = Protocol() + 'api.lampa.stream/', type = '', jackets = {}, cards, ping_auth, manifest, menu_list = [], vip = true, leftVipD = '💎💎💎💎💎', user_id = 41838989, uid = 'c6baa905255590eaaf36a6710_41838989', IP = '185.153.179.57', logged = true, VAST_url = false;
 
   console.log('GetREKT', 'plugin', '[POST] LOADED - ' + Protocol() + 'lampa.stream');
   console.log('GetREKT', 'device', '[UID] ' + uid);
@@ -11534,8 +11534,9 @@
       $('body').append(Lampa.Template.get('getrekt_online_css', {}, true));
       if (!document.getElementById('getrekt-online-css-fix')) {
         $('body').append('<style id="getrekt-online-css-fix">'
-          + '.view--getrekt_online .online_getrekt{font-size:1em!important;}'
-          + '.view--getrekt_online .online_getrekt__loader{width:32px!important;height:32px!important;margin-left:-16px!important;margin-top:-16px!important;}'
+          + '.online_getrekt,.online-getrekt-watched,.onlines_v1{font-size:1rem!important;}'
+          + '.online_getrekt__loader{width:32px!important;height:32px!important;margin-left:-16px!important;margin-top:-16px!important;}'
+          + '.online_getrekt__viewed,.online_getrekt__subtitle{font-size:12px!important;padding:4px!important;}'
           + '</style>');
       }
       $('body').append(Lampa.Template.get('radio_style_getrekt', {}, true));
